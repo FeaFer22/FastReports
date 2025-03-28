@@ -1,4 +1,5 @@
 
+using System;
 using System.Drawing;
 using System.Reflection.Metadata.Ecma335;
 using FastReports.Model;
@@ -11,6 +12,7 @@ namespace FastReports
         private BaseShape _shape;
         private RectangleShape _rectangle;
         private CircleShape _circle;
+        private TriangleShape _triangle;
         private int x = 0;
         private int y = 0;
         public FormFastReports()
@@ -19,9 +21,11 @@ namespace FastReports
 
             _rectangle = new RectangleShape();
             _circle = new CircleShape();
+            _triangle = new TriangleShape();
 
             comboBoxShapeType.Items.Add(_rectangle);
             comboBoxShapeType.Items.Add(_circle);
+            comboBoxShapeType.Items.Add(_triangle);
 
             comboBoxBorderColor.Items.Add(Color.Red);
             comboBoxBorderColor.Items.Add(Color.Green);
@@ -32,6 +36,7 @@ namespace FastReports
             comboBoxFillColor.Items.Add(Color.Blue);
 
             groupBoxCircle.Location = new Point(12, 59);
+            groupBoxTriangle.Location = new Point(12, 59);
 
         }
 
@@ -41,16 +46,25 @@ namespace FastReports
             if (comboBoxShapeType.SelectedItem != null)
             {
                 groupBoxColors.Visible = true;
+                groupBoxPoint.Visible = true;
+                buttonDraw.Visible = true;
 
                 switch (comboBoxShapeType.SelectedItem.ToString())
                 {
                     case "Прямоугольник":
-                        groupBoxCircle.Visible = true;
+                        groupBoxCircle.Visible = false;
                         groupBoxRectangle.Visible = true;
+                        groupBoxTriangle.Visible = false;
                         break;
                     case "Круг":
                         groupBoxRectangle.Visible = false;
+                        groupBoxTriangle.Visible = false;
                         groupBoxCircle.Visible = true;
+                        break;
+                    case "Треугольник":
+                        groupBoxRectangle.Visible = false;
+                        groupBoxTriangle.Visible = true;
+                        groupBoxCircle.Visible = false;
                         break;
                     default:
                         break;
@@ -82,14 +96,18 @@ namespace FastReports
                         _circle.Radius = Convert.ToInt32(textBoxRadius.Text);
                         break;
                     case "Треугольник":
+                        _triangle.Rectangle = pictureBox1.ClientRectangle;
+                        _triangle.SideLength = Convert.ToInt32(textBoxSideLength.Text);
+                        _triangle.AngleInDegrees = Convert.ToDouble(textBoxAngle.Text);
                         break;
                     default:
                         break;
                 }
+
                 _shape.Draw(pictureBox1.CreateGraphics(),
                     (Color)comboBoxFillColor.SelectedItem,
                     (Color)comboBoxBorderColor.SelectedItem,
-                    Convert.ToInt32(textBoxBorderWidth.Text));
+                    Convert.ToInt32(textBoxBorderWidth.Text), pictureBox1.Width, pictureBox1.Height);
             }
         }
 
@@ -109,5 +127,9 @@ namespace FastReports
             }
         }
 
+        private void buttonIsPointInShape_Click(object sender, EventArgs e)
+        {
+            labelYesNo.Text = Convert.ToString(_shape.IsPointInShape(new Point(int.Parse(textBoxPointX.Text), int.Parse(textBoxPointY.Text))));
+        }
     }
 }

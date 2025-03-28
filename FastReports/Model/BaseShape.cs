@@ -12,7 +12,7 @@
             return Name;
         }
 
-        public abstract void Draw(Graphics graphics, Color fillColor, Color borderColor, int borderWidth);
-        public abstract void IsPointInShape();
+        public abstract void Draw(Graphics graphics, Color fillColor, Color borderColor, int borderWidth, int pointWidth, int pointHeight);
+        public abstract bool IsPointInShape(Point point);
     }
 }

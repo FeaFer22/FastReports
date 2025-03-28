@@ -32,7 +32,6 @@ namespace FastReports
             groupBoxCircle = new GroupBox();
             textBoxRadius = new TextBox();
             labelRadius = new Label();
-            pictureBox1 = new PictureBox();
             buttonDraw = new Button();
             labelShapeSelector = new Label();
             comboBoxShapeType = new ComboBox();
@@ -50,17 +49,33 @@ namespace FastReports
             comboBoxFillColor = new ComboBox();
             labelBorderColor = new Label();
             comboBoxBorderColor = new ComboBox();
+            groupBoxTriangle = new GroupBox();
+            labelSideLength = new Label();
+            textBoxSideLength = new TextBox();
+            labelAngle = new Label();
+            textBoxAngle = new TextBox();
+            labelPointA = new Label();
+            pictureBox1 = new PictureBox();
+            groupBoxPoint = new GroupBox();
+            labelYesNo = new Label();
+            textBoxPointY = new TextBox();
+            labelPointY = new Label();
+            buttonIsPointInShape = new Button();
+            textBoxPointX = new TextBox();
+            labelPointX = new Label();
             groupBoxCircle.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             groupBoxRectangle.SuspendLayout();
             groupBoxColors.SuspendLayout();
+            groupBoxTriangle.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            groupBoxPoint.SuspendLayout();
             SuspendLayout();
             // 
             // groupBoxCircle
             // 
             groupBoxCircle.Controls.Add(textBoxRadius);
             groupBoxCircle.Controls.Add(labelRadius);
-            groupBoxCircle.Location = new Point(194, 251);
+            groupBoxCircle.Location = new Point(203, 226);
             groupBoxCircle.Name = "groupBoxCircle";
             groupBoxCircle.Size = new Size(226, 83);
             groupBoxCircle.TabIndex = 16;
@@ -84,25 +99,15 @@ namespace FastReports
             labelRadius.TabIndex = 11;
             labelRadius.Text = "Радиус:";
             // 
-            // pictureBox1
-            // 
-            pictureBox1.Location = new Point(259, 30);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(736, 408);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            pictureBox1.MouseDown += pictureBox1_MouseDown;
-            pictureBox1.MouseMove += pictureBox1_MouseMove;
-            // 
             // buttonDraw
             // 
-            buttonDraw.Location = new Point(12, 415);
+            buttonDraw.Location = new Point(12, 384);
             buttonDraw.Name = "buttonDraw";
             buttonDraw.Size = new Size(159, 23);
             buttonDraw.TabIndex = 1;
             buttonDraw.Text = "Нарисовать";
             buttonDraw.UseVisualStyleBackColor = true;
+            buttonDraw.Visible = false;
             buttonDraw.Click += buttonDraw_Click;
             // 
             // labelShapeSelector
@@ -193,12 +198,13 @@ namespace FastReports
             groupBoxColors.Controls.Add(comboBoxFillColor);
             groupBoxColors.Controls.Add(labelBorderColor);
             groupBoxColors.Controls.Add(comboBoxBorderColor);
-            groupBoxColors.Location = new Point(12, 192);
+            groupBoxColors.Location = new Point(12, 191);
             groupBoxColors.Name = "groupBoxColors";
             groupBoxColors.Size = new Size(159, 185);
             groupBoxColors.TabIndex = 15;
             groupBoxColors.TabStop = false;
             groupBoxColors.Text = "Выберите цвета и ширину контура:";
+            groupBoxColors.Visible = false;
             // 
             // textBoxBorderWidth
             // 
@@ -250,11 +256,146 @@ namespace FastReports
             comboBoxBorderColor.Size = new Size(121, 23);
             comboBoxBorderColor.TabIndex = 0;
             // 
+            // groupBoxTriangle
+            // 
+            groupBoxTriangle.Controls.Add(labelSideLength);
+            groupBoxTriangle.Controls.Add(textBoxSideLength);
+            groupBoxTriangle.Controls.Add(labelAngle);
+            groupBoxTriangle.Controls.Add(textBoxAngle);
+            groupBoxTriangle.Controls.Add(labelPointA);
+            groupBoxTriangle.Location = new Point(203, 315);
+            groupBoxTriangle.Name = "groupBoxTriangle";
+            groupBoxTriangle.Size = new Size(200, 112);
+            groupBoxTriangle.TabIndex = 17;
+            groupBoxTriangle.TabStop = false;
+            groupBoxTriangle.Text = "Введите угол треугольника:";
+            groupBoxTriangle.Visible = false;
+            // 
+            // labelSideLength
+            // 
+            labelSideLength.AutoSize = true;
+            labelSideLength.Location = new Point(6, 64);
+            labelSideLength.Name = "labelSideLength";
+            labelSideLength.Size = new Size(96, 15);
+            labelSideLength.TabIndex = 4;
+            labelSideLength.Text = "Длина стороны:";
+            // 
+            // textBoxSideLength
+            // 
+            textBoxSideLength.Location = new Point(6, 82);
+            textBoxSideLength.Name = "textBoxSideLength";
+            textBoxSideLength.Size = new Size(100, 23);
+            textBoxSideLength.TabIndex = 3;
+            // 
+            // labelAngle
+            // 
+            labelAngle.AutoSize = true;
+            labelAngle.Location = new Point(6, 20);
+            labelAngle.Name = "labelAngle";
+            labelAngle.Size = new Size(36, 15);
+            labelAngle.TabIndex = 2;
+            labelAngle.Text = "Угол:";
+            // 
+            // textBoxAngle
+            // 
+            textBoxAngle.Location = new Point(6, 38);
+            textBoxAngle.Name = "textBoxAngle";
+            textBoxAngle.Size = new Size(100, 23);
+            textBoxAngle.TabIndex = 1;
+            // 
+            // labelPointA
+            // 
+            labelPointA.AutoSize = true;
+            labelPointA.Location = new Point(6, 19);
+            labelPointA.Name = "labelPointA";
+            labelPointA.Size = new Size(0, 15);
+            labelPointA.TabIndex = 0;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(259, 30);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(736, 519);
+            pictureBox1.TabIndex = 18;
+            pictureBox1.TabStop = false;
+            pictureBox1.MouseDown += pictureBox1_MouseDown;
+            pictureBox1.MouseMove += pictureBox1_MouseMove;
+            // 
+            // groupBoxPoint
+            // 
+            groupBoxPoint.Controls.Add(labelYesNo);
+            groupBoxPoint.Controls.Add(textBoxPointY);
+            groupBoxPoint.Controls.Add(labelPointY);
+            groupBoxPoint.Controls.Add(buttonIsPointInShape);
+            groupBoxPoint.Controls.Add(textBoxPointX);
+            groupBoxPoint.Controls.Add(labelPointX);
+            groupBoxPoint.Location = new Point(12, 413);
+            groupBoxPoint.Name = "groupBoxPoint";
+            groupBoxPoint.Size = new Size(185, 136);
+            groupBoxPoint.TabIndex = 19;
+            groupBoxPoint.TabStop = false;
+            groupBoxPoint.Text = "Лежит ли точка внутри примитива:";
+            groupBoxPoint.Visible = false;
+            // 
+            // labelYesNo
+            // 
+            labelYesNo.AutoSize = true;
+            labelYesNo.Location = new Point(102, 60);
+            labelYesNo.Name = "labelYesNo";
+            labelYesNo.Size = new Size(16, 15);
+            labelYesNo.TabIndex = 5;
+            labelYesNo.Text = "...";
+            // 
+            // textBoxPointY
+            // 
+            textBoxPointY.Location = new Point(10, 101);
+            textBoxPointY.Name = "textBoxPointY";
+            textBoxPointY.Size = new Size(80, 23);
+            textBoxPointY.TabIndex = 4;
+            // 
+            // labelPointY
+            // 
+            labelPointY.AutoSize = true;
+            labelPointY.Location = new Point(10, 83);
+            labelPointY.Name = "labelPointY";
+            labelPointY.Size = new Size(85, 15);
+            labelPointY.TabIndex = 3;
+            labelPointY.Text = "Координата Y:";
+            // 
+            // buttonIsPointInShape
+            // 
+            buttonIsPointInShape.Location = new Point(96, 101);
+            buttonIsPointInShape.Name = "buttonIsPointInShape";
+            buttonIsPointInShape.Size = new Size(75, 23);
+            buttonIsPointInShape.TabIndex = 2;
+            buttonIsPointInShape.Text = "Проверить!";
+            buttonIsPointInShape.UseVisualStyleBackColor = true;
+            buttonIsPointInShape.Click += buttonIsPointInShape_Click;
+            // 
+            // textBoxPointX
+            // 
+            textBoxPointX.Location = new Point(9, 52);
+            textBoxPointX.Name = "textBoxPointX";
+            textBoxPointX.Size = new Size(83, 23);
+            textBoxPointX.TabIndex = 1;
+            // 
+            // labelPointX
+            // 
+            labelPointX.AutoSize = true;
+            labelPointX.Location = new Point(9, 34);
+            labelPointX.Name = "labelPointX";
+            labelPointX.Size = new Size(85, 15);
+            labelPointX.TabIndex = 0;
+            labelPointX.Text = "Координата Х:";
+            // 
             // FormFastReports
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1007, 450);
+            AutoSize = true;
+            ClientSize = new Size(1007, 561);
+            Controls.Add(groupBoxPoint);
+            Controls.Add(groupBoxTriangle);
             Controls.Add(groupBoxRectangle);
             Controls.Add(groupBoxColors);
             Controls.Add(labelLog);
@@ -263,24 +404,26 @@ namespace FastReports
             Controls.Add(labelShapeSelector);
             Controls.Add(buttonDraw);
             Controls.Add(pictureBox1);
+            MaximumSize = new Size(1023, 600);
+            MinimumSize = new Size(1023, 600);
             Name = "FormFastReports";
             Text = "Fast Reports";
             groupBoxCircle.ResumeLayout(false);
             groupBoxCircle.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             groupBoxRectangle.ResumeLayout(false);
             groupBoxRectangle.PerformLayout();
             groupBoxColors.ResumeLayout(false);
             groupBoxColors.PerformLayout();
+            groupBoxTriangle.ResumeLayout(false);
+            groupBoxTriangle.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            groupBoxPoint.ResumeLayout(false);
+            groupBoxPoint.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
-
-
         #endregion
-
-        private PictureBox pictureBox1;
         private Button buttonDraw;
         private Label labelShapeSelector;
         private ComboBox comboBoxShapeType;
@@ -301,5 +444,23 @@ namespace FastReports
         private GroupBox groupBoxCircle;
         private TextBox textBoxRadius;
         private Label labelRadius;
+        private GroupBox groupBoxTriangle;
+        private TextBox textBoxPointC;
+        private Label labelPointC;
+        private TextBox textBoxPointB;
+        private Label labelPointB;
+        private TextBox textBoxAngle;
+        private Label labelPointA;
+        private PictureBox pictureBox1;
+        private Label labelAngle;
+        private Label labelSideLength;
+        private TextBox textBoxSideLength;
+        private GroupBox groupBoxPoint;
+        private TextBox textBoxPointX;
+        private Label labelPointX;
+        private Button buttonIsPointInShape;
+        private TextBox textBoxPointY;
+        private Label labelPointY;
+        private Label labelYesNo;
     }
 }
