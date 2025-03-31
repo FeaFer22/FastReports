@@ -96,9 +96,8 @@ namespace FastReports
                         _circle.Radius = Convert.ToInt32(textBoxRadius.Text);
                         break;
                     case "Треугольник":
-                        _triangle.Rectangle = pictureBox1.ClientRectangle;
+                        _triangle.Position = new PointF(pictureBox1.Width/2,pictureBox1.Height/2);
                         _triangle.SideLength = Convert.ToInt32(textBoxSideLength.Text);
-                        _triangle.AngleInDegrees = Convert.ToDouble(textBoxAngle.Text);
                         break;
                     default:
                         break;

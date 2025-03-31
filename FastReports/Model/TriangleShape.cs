@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using FastReports.Shapes;
@@ -10,15 +11,11 @@ namespace FastReports.Model
 {
     class TriangleShape : BaseShape
     {
-        public PointF pointA;
-        public PointF pointB;
-        public PointF pointC;
-
-        private Rectangle _rectangle;
-        public Rectangle Rectangle
+        private PointF _position;
+        public PointF Position
         {
-            get { return _rectangle; }
-            set { _rectangle = value; }
+            get { return _position; }
+            set { _position = value; }
         }
 
         private int _sideLength;
@@ -28,12 +25,7 @@ namespace FastReports.Model
             set { _sideLength = value; }
         }
 
-        private double _angleInDegrees;
-        public double AngleInDegrees
-        {
-            get { return _angleInDegrees; }
-            set { _angleInDegrees = value; }
-        }
+        private double _angleInDegrees = 60;
 
         private PointF[] _points;
         public PointF[] Points 
@@ -44,7 +36,8 @@ namespace FastReports.Model
 
         public TriangleShape() 
         {
-            _points = [pointA, pointB, pointC];
+            _points = new PointF[3];
+            Position = _position;
             Name = "Треугольник";
         }
 
@@ -53,35 +46,23 @@ namespace FastReports.Model
             Pen pen = new Pen(borderColor, borderWidth);
             SolidBrush brush = new SolidBrush(fillColor);
 
-            _sideLength = Math.Min(_rectangle.Width, _rectangle.Height);
 
-            Point centerPoint = new Point(_rectangle.X + _rectangle.Width / 2, _rectangle.Y + _rectangle.Height / 2);
 
-            double _angleInRadians = Math.PI * _angleInDegrees / 180;
-
-            pointA = CalculateVertex(centerPoint, _sideLength, _angleInRadians + Math.PI / 2);
-            pointB = CalculateVertex(centerPoint, _sideLength, _angleInRadians - Math.PI / 6);
-            pointC = CalculateVertex(centerPoint, _sideLength, _angleInRadians + 5 * Math.PI / 6);
+            _points[0] = new PointF(_position.X, _position.Y);
+            _points[1] = new PointF(_position.X + _sideLength, _position.Y);
+            _points[2] = new PointF(_position.X + _sideLength / 2, _position.Y - (int)(_sideLength * Math.Sqrt(3) / 2));
 
             graphics.DrawPolygon(pen, _points);
             graphics.FillPolygon(brush, _points);
-        }
-
-        private PointF CalculateVertex(Point center, int radius, double angle)
-        {
-            return new PointF(
-                (float)(center.X + radius * Math.Cos(angle)),
-                (float)(center.Y + radius * Math.Sin(angle))
-                );
         }
 
         public override bool IsPointInShape(Point point)
         {
             bool b1, b2, b3;
 
-            b1 = Sign(point, pointA, pointB) < 0.0f;
-            b2 = Sign(point, pointB, pointC) < 0.0f;
-            b3 = Sign(point, pointC, pointA) < 0.0f;
+            b1 = Sign(point, _points[0], _points[1]) < 0.0f;
+            b2 = Sign(point, _points[1], _points[2]) < 0.0f;
+            b3 = Sign(point, _points[2], _points[0]) < 0.0f;
 
             return ((b1 == b2) && (b2 == b3));
         }

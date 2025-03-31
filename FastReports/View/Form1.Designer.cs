@@ -52,8 +52,6 @@ namespace FastReports
             groupBoxTriangle = new GroupBox();
             labelSideLength = new Label();
             textBoxSideLength = new TextBox();
-            labelAngle = new Label();
-            textBoxAngle = new TextBox();
             labelPointA = new Label();
             pictureBox1 = new PictureBox();
             groupBoxPoint = new GroupBox();
@@ -260,15 +258,13 @@ namespace FastReports
             // 
             groupBoxTriangle.Controls.Add(labelSideLength);
             groupBoxTriangle.Controls.Add(textBoxSideLength);
-            groupBoxTriangle.Controls.Add(labelAngle);
-            groupBoxTriangle.Controls.Add(textBoxAngle);
             groupBoxTriangle.Controls.Add(labelPointA);
             groupBoxTriangle.Location = new Point(203, 315);
             groupBoxTriangle.Name = "groupBoxTriangle";
             groupBoxTriangle.Size = new Size(200, 112);
             groupBoxTriangle.TabIndex = 17;
             groupBoxTriangle.TabStop = false;
-            groupBoxTriangle.Text = "Введите угол треугольника:";
+            groupBoxTriangle.Text = "Введите длину стороны треугольника:";
             groupBoxTriangle.Visible = false;
             // 
             // labelSideLength
@@ -286,22 +282,6 @@ namespace FastReports
             textBoxSideLength.Name = "textBoxSideLength";
             textBoxSideLength.Size = new Size(100, 23);
             textBoxSideLength.TabIndex = 3;
-            // 
-            // labelAngle
-            // 
-            labelAngle.AutoSize = true;
-            labelAngle.Location = new Point(6, 20);
-            labelAngle.Name = "labelAngle";
-            labelAngle.Size = new Size(36, 15);
-            labelAngle.TabIndex = 2;
-            labelAngle.Text = "Угол:";
-            // 
-            // textBoxAngle
-            // 
-            textBoxAngle.Location = new Point(6, 38);
-            textBoxAngle.Name = "textBoxAngle";
-            textBoxAngle.Size = new Size(100, 23);
-            textBoxAngle.TabIndex = 1;
             // 
             // labelPointA
             // 
@@ -449,10 +429,8 @@ namespace FastReports
         private Label labelPointC;
         private TextBox textBoxPointB;
         private Label labelPointB;
-        private TextBox textBoxAngle;
         private Label labelPointA;
         private PictureBox pictureBox1;
-        private Label labelAngle;
         private Label labelSideLength;
         private TextBox textBoxSideLength;
         private GroupBox groupBoxPoint;
