@@ -49,19 +49,19 @@ namespace FastReports
                 groupBoxPoint.Visible = true;
                 buttonDraw.Visible = true;
 
-                switch (comboBoxShapeType.SelectedItem.ToString())
+                switch (comboBoxShapeType.SelectedIndex)
                 {
-                    case "Прямоугольник":
+                    case 0:
                         groupBoxCircle.Visible = false;
                         groupBoxRectangle.Visible = true;
                         groupBoxTriangle.Visible = false;
                         break;
-                    case "Круг":
+                    case 1:
                         groupBoxRectangle.Visible = false;
                         groupBoxTriangle.Visible = false;
                         groupBoxCircle.Visible = true;
                         break;
-                    case "Треугольник":
+                    case 2:
                         groupBoxRectangle.Visible = false;
                         groupBoxTriangle.Visible = true;
                         groupBoxCircle.Visible = false;

@@ -119,6 +119,7 @@ namespace FastReports
             // 
             // comboBoxShapeType
             // 
+            comboBoxShapeType.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxShapeType.FormattingEnabled = true;
             comboBoxShapeType.Location = new Point(12, 30);
             comboBoxShapeType.Name = "comboBoxShapeType";
@@ -231,6 +232,7 @@ namespace FastReports
             // 
             // comboBoxFillColor
             // 
+            comboBoxFillColor.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxFillColor.FormattingEnabled = true;
             comboBoxFillColor.Location = new Point(6, 103);
             comboBoxFillColor.Name = "comboBoxFillColor";
@@ -248,6 +250,7 @@ namespace FastReports
             // 
             // comboBoxBorderColor
             // 
+            comboBoxBorderColor.DropDownStyle = ComboBoxStyle.DropDownList;
             comboBoxBorderColor.FormattingEnabled = true;
             comboBoxBorderColor.Location = new Point(6, 59);
             comboBoxBorderColor.Name = "comboBoxBorderColor";
