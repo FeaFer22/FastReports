@@ -86,16 +86,16 @@ namespace FastReports
 
             if (comboBoxShapeType.SelectedItem != null)
             {
-                switch (comboBoxShapeType.SelectedItem.ToString())
+                switch (comboBoxShapeType.SelectedIndex)
                 {
-                    case "Прямоугольник":
+                    case 0:
                         _rectangle.Height = Convert.ToInt32(textBoxHeight.Text);
                         _rectangle.Width = Convert.ToInt32(textBoxWidth.Text);
                         break;
-                    case "Круг":
+                    case 1:
                         _circle.Radius = Convert.ToInt32(textBoxRadius.Text);
                         break;
-                    case "Треугольник":
+                    case 2:
                         _triangle.Position = new PointF(pictureBox1.Width/2,pictureBox1.Height/2);
                         _triangle.SideLength = Convert.ToInt32(textBoxSideLength.Text);
                         break;
