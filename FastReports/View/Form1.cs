@@ -1,7 +1,3 @@
-
-using System;
-using System.Drawing;
-using System.Reflection.Metadata.Ecma335;
 using FastReports.Model;
 using FastReports.Shapes;
 
@@ -15,6 +11,9 @@ namespace FastReports
         private TriangleShape _triangle;
         private int x = 0;
         private int y = 0;
+        private Color[] colors;
+        private GroupBox[] groupBoxes;
+        private BaseShape[] _shapes;
         public FormFastReports()
         {
             InitializeComponent();
@@ -23,21 +22,25 @@ namespace FastReports
             _circle = new CircleShape();
             _triangle = new TriangleShape();
 
-            comboBoxShapeType.Items.Add(_rectangle);
-            comboBoxShapeType.Items.Add(_circle);
-            comboBoxShapeType.Items.Add(_triangle);
+            colors = [Color.Red, Color.Blue, Color.Green];
+            groupBoxes = [groupBoxRectangle, groupBoxCircle, groupBoxTriangle];
+            _shapes = [_rectangle, _circle, _triangle];
 
-            comboBoxBorderColor.Items.Add(Color.Red);
-            comboBoxBorderColor.Items.Add(Color.Green);
-            comboBoxBorderColor.Items.Add(Color.Blue);
+            ComboBoxAdd(comboBoxShapeType, _shapes);
 
-            comboBoxFillColor.Items.Add(Color.Red);
-            comboBoxFillColor.Items.Add(Color.Green);
-            comboBoxFillColor.Items.Add(Color.Blue);
+            ComboBoxAdd(comboBoxBorderColor, colors);
+
+            ComboBoxAdd(comboBoxFillColor, colors);
 
             groupBoxCircle.Location = new Point(12, 59);
             groupBoxTriangle.Location = new Point(12, 59);
 
+        }
+
+
+        private void ComboBoxAdd<T>(ComboBox comboBox, T[] array)
+        {
+            foreach (var item in array) { comboBox.Items.Add(item); }
         }
 
 
@@ -49,30 +52,26 @@ namespace FastReports
                 groupBoxPoint.Visible = true;
                 buttonDraw.Visible = true;
 
-                switch (comboBoxShapeType.SelectedIndex)
-                {
-                    case 0:
-                        groupBoxCircle.Visible = false;
-                        groupBoxRectangle.Visible = true;
-                        groupBoxTriangle.Visible = false;
-                        break;
-                    case 1:
-                        groupBoxRectangle.Visible = false;
-                        groupBoxTriangle.Visible = false;
-                        groupBoxCircle.Visible = true;
-                        break;
-                    case 2:
-                        groupBoxRectangle.Visible = false;
-                        groupBoxTriangle.Visible = true;
-                        groupBoxCircle.Visible = false;
-                        break;
-                    default:
-                        break;
-                }
+                GroupBoxVisibility();
 
                 labelLog.Text = comboBoxShapeType.SelectedItem.ToString();
             }
             else labelLog.Text = "Фигура не была выбрана.";
+        }
+
+        private void GroupBoxVisibility()
+        {
+            int selectedIndex = comboBoxShapeType.SelectedIndex;
+
+            foreach (var box in groupBoxes)
+            {
+                box.Visible = false;
+            }
+
+            if (selectedIndex >= 0 && selectedIndex < groupBoxes.Length)
+            {
+                groupBoxes[selectedIndex].Visible = true;
+            }
         }
 
 
